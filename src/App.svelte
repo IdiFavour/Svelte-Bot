@@ -44,7 +44,7 @@
 					<div class="bg-white shadow overflow-hidden sm:rounded-lg">
 						<div class="border-t border-gray-200">
 							<div class="flex-1 p:2 sm:p-6 justify-between flex flex-col h-bot ">
-								<div class="message-card h-full flex flex-col space-y-2 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
+								<div class="message-card py-2 h-full flex flex-col space-y-2 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
 								>
 									{#each messages as me, index}
 										<div class="flex items-end overflow:hidden  justify-end"
