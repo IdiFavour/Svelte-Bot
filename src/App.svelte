@@ -1,19 +1,87 @@
 <script>
+	import { onMount, beforeUpdate, afterUpdate } from "svelte";
 	let message = "";
 	let messages = [];
+	let respondsGreet = [
+		'Hey',
+		'Hello',
+		'Hi there',
+		'Afa',
+		'Sup'
+	]
+	let respondFeel = [
+		'Good',
+		'Nice, You?',
+		'Awesome',
+		'Great'
+	]
+	let userAction = [
+		'Good',
+		'Nice',
+		'Awesome',
+		'Great'
+	]
+	let userResponse = [
+		"how are you", "how is life", "how are things", "how you dey"
+	]
+	let botResponse = [
+		"Am human", 'Am Svelte bot'
+	]
+	let resnum = Math.floor((Math.random() * respondsGreet.length));
+	let div;
+  	let autoscroll;
 
+	beforeUpdate(() => {
+		autoscroll =
+		div && div.offsetHeight + div.scrollTop > div.scrollHeight - 20;
+	});
+
+	afterUpdate(() => {
+		if (autoscroll) div.scrollTo(0, div.scrollHeight);
+	});
 	const sendMsg = () => {
-		messages = [
-			...messages,
-			{
-				msg: message,
-			},
-		];
+		if (message == ''){
+			
+		}
+		else{
+			messages.push([message, true])
+			//looping through the messages to get user input
+			for (var i = 0; i < messages.length; i++) {
+				var userMsg = messages[i];
+				console.log(userMsg[0].toLowerCase())	
+    		}
+			//testing if first input is not hello
+			if(userMsg[0].toLowerCase() != 'Hello'.toLowerCase()) {
+					
+			}
+			// bot response to first greeting
+			if (userResponse.includes(userMsg[0].toLowerCase())) {
+				messages.push([respondFeel[Math.floor((Math.random() * respondFeel.length))],false])
+			}
+			// first greeting to the bot
+			if (userMsg[0].toLowerCase() == 'Hello'.toLowerCase()){
+				messages.push([respondsGreet[resnum], false])
+			}
+			//asking what are you to the bot
+			if (userMsg[0].toLowerCase() == 'What are you'.toLowerCase()) {
+				messages.push([botResponse[Math.floor((Math.random() * botResponse.length))],false])
+			}
+		}
+		messages = messages
+		console.log(messages)
+		// messages = [
+		// 	...messages,
+		// 	{
+		// 		msg: message,
+		// 		res: "Hey",
+		// 	},
+		// ];
 
+		
+		
 		message = "";
 	};
-	console.log(message);
-	console.log(messages);
+	
 </script>
 
 <main class="text-gray-900 leading-tight">
@@ -44,43 +112,44 @@
 					<div class="bg-white shadow overflow-hidden sm:rounded-lg">
 						<div class="border-t border-gray-200">
 							<div class="flex-1 p:2 sm:p-6 justify-between flex flex-col h-bot ">
-								<div class="message-card py-2 h-full flex flex-col space-y-2 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
+								<div id="message-card" bind:this={div} class="message-card py-2 h-full flex flex-col space-y-2 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
 								>
 									{#each messages as me, index}
-										<div class="flex items-end overflow:hidden  justify-end"
-										>
-											<div class="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end"
+										{#if (me[1] == true)}
+											<div class="flex items-end overflow:hidden  justify-end"
+											>
+												<div class="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end"
+												>
+													<div>
+														<span
+															class="px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white "
+														>
+															{me[0]}
+														</span>
+													</div>
+												</div>
+											</div>
+										{:else if (me[1] == false) }
+										<div class="flex items-end my-2">
+											<div
+												class="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start"
 											>
 												<div>
 													<span
-														class="px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white "
+														class="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600"
+														>{me[0]}</span
 													>
-														{me.msg}
-													</span>
 												</div>
 											</div>
+											
 										</div>
+										{/if}
 									{:else}
-										<p class="text-center">No Chat</p>
+										<p class="text-center">Type Hello to get a response</p>
 									{/each}
-									<!-- <div class="flex items-end my-2">
-										<div
-											class="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start"
-										>
-											<div>
-												<span
-													class="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600"
-													>Can be verified on any
-													platform using docker</span
-												>
-											</div>
-										</div>
-										<img
-											src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144"
-											alt="My profile"
-											class="w-6 h-6 rounded-full order-1"
-										/>
-									</div> -->
+									<!-- {#each messages as respond}
+										
+									{/each} -->
 									
 								</div>
 
@@ -173,6 +242,11 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		let level = document.getElementById('message-card')
+	// el.scrollTop = el.scrollHeight
+	level.scrollTop = level.scrollHeight
+	</script>
 </main>
 
 <style>
