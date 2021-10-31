@@ -97,14 +97,15 @@
 						src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
 						alt="Workflow"
 					/>
-					<h2 class="mt-2 text-center text-3xl font-extrabold text-gray-900">
+					<h2 class=" text-center text-3xl font-extrabold text-gray-900">
 						Svelte Bot
 					</h2>
 					<p class=" text-center text-sm text-gray-600">
 						
 						<a href="https://idifavour.netlify.app/" class="font-medium text-indigo-600 hover:text-indigo-500">
-						  Created by Idi Favour
+						  Created by Idi Favour (Svelte & Tailwind)
 						</a>
+						
 					  </p>
 				</div>
 				<div class="container">
