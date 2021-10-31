@@ -25,7 +25,7 @@
 		"how are you", "how is life", "how are things", "how you dey"
 	]
 	let botResponse = [
-		"Am human", 'Am Svelte bot'
+		"Am human", 'Am Sveltebot'
 	]
 	let resnum = Math.floor((Math.random() * respondsGreet.length));
 	let div;
@@ -66,6 +66,7 @@
 			if (userMsg[0].toLowerCase() == 'What are you'.toLowerCase()) {
 				messages.push([botResponse[Math.floor((Math.random() * botResponse.length))],false])
 			}
+			
 		}
 		messages = messages
 		console.log(messages)
